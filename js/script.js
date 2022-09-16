@@ -19,34 +19,35 @@ jobRole.addEventListener("change", e => {
     });
 
 //tshirt info section 
-// let eventValue = '';
-// let dataTheme = '';
 
-// option element children of the Color select element
+const shirtDesign = document.getElementById('design');
+const shirtColor = document.getElementById('color');
+shirtColor.disabled = true;
 
-// const shirtColor = document.getElementById('color');
-// // shirtColor.disabled = true;
-// const shirtDesign = document.getElementById('design');
+let jsPuns = document.querySelectorAll('[data-theme="js puns"]');
+    
+let  heartJS = document.querySelectorAll('[data-theme="heart js"]');
 
+shirtDesign.addEventListener("change", e => {
+    shirtColor.disabled = false;
+    for (let i = 0; i < shirtColor.length; i++ ) {
+         let eventValue = e.target.value;
 
+         if (eventValue === jsPuns) {
+            jsPuns.hidden = false;
+         } else  {
+            jsPuns.hidden = true;
+         };
 
-// shirtDesign.addEventListener("change", e => {
-//     shirtColor.disabled = false;
-//     for (let i = 0; i < shirtColor.length; i++ ) {
-//          let eventValue = e.target.value;
-//         let  dataTheme = shirtColor.getAttribute('data-theme');
+         if (eventValue === heartJS) {
+            heartJS.hidden = false;
+         } else{
+            heartJS.hidden = true;
+         };
 
-//          if (eventValue === dataTheme) {
-//             shirtColor[i].getAttribute('data-theme').hidden = false;
-//             shirtColor[i].getAttribute('data-theme').hidden = true;
-//          } else {
-//             shirtColor[i].getAttribute('data-theme').hidden = true;
-//             shirtColor[i].getAttributel('data-theme').hidden = false;
-//          }
+         };
 
-//     }
-
-// });
+});
 
 //register for activities section
 
@@ -59,7 +60,6 @@ activities.addEventListener("change", (e) => {
    let clicked = e.target;
    let dataCost = +clicked.getAttribute('data-cost');
 
-    
     if (clicked.checked){
       totalCost += dataCost; 
     } else {
@@ -88,4 +88,8 @@ payment.addEventListener("change", e => {
 
 
 });
+
+//form validation
+
+//accessibility
 
