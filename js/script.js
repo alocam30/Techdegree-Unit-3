@@ -30,24 +30,21 @@ let  heartJS = document.querySelectorAll('[data-theme="heart js"]');
 
 shirtDesign.addEventListener("change", e => {
     shirtColor.disabled = false;
-    for (let i = 0; i < shirtColor.length; i++ ) {
-         let eventValue = e.target.value;
+    let eventValue = e.target.value;
 
          if (eventValue === jsPuns) {
+            for (let i = 0; i < shirtColor.length; i++ ) {
             jsPuns.hidden = false;
-         } else  {
+            heartJS.hidden = true;
+         } }  else {
+            for (let i = 0; i < shirtColor.length; i++ ) 
+            heartJS.hidden = false;
             jsPuns.hidden = true;
          };
 
-         if (eventValue === heartJS) {
-            heartJS.hidden = false;
-         } else{
-            heartJS.hidden = true;
-         };
+         }
 
-         };
-
-});
+);
 
 //register for activities section
 
@@ -76,15 +73,28 @@ const payment = document.getElementById('payment');
 const creditCard = document.getElementById('credit-card');
 
 const paypal = document.getElementById('paypal');
-paypal.style.display = 'none';
+paypal.hidden = true;
 
 const bitcoin = document.getElementById('bitcoin');
-bitcoin.style.display ='none';
+bitcoin.hidden = true;
 
-payment.setAttribute()
+ payment.setAttribute('value.children', 'value.children.selected'); 
 
 payment.addEventListener("change", e => {
-
+    let paymentClicked = e.target.value;
+    if (paymentClicked === creditCard ){
+        creditCard.hidden = false;
+        paypal.hidden = true;
+        bitcoin.hidden = true;
+    } else if (paymentClicked === paypal) {
+        paypal.hidden = false;
+        creditCard.hidden = true;
+        bitcoin.hidden = true;
+    } else if (paymentClicked === bitcoin ){
+        bitcoin.hidden = false;
+        paypal.hidden = true;
+        creditCard.hidden = true;
+    }
 
 
 });
