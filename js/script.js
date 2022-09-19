@@ -110,71 +110,134 @@ const zipcode = document.getElementById('zip');
 const cvv = document.getElementById('cvv');
 const form = document.querySelector('form');
 
-function nameTest (){
+let emailResult;
+let activitiesResult;
+let cardResult;
+let zipcodeResult;
+let cvvResult;
+
+form.addEventListener("submit", e => {
+//name validation
+    function nameTest(){
     let nameInput = nameElement.value;
     let nameResult = /^[a-zA-z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameInput);
     return nameResult;
-};
+    };
+
+    if (!nameTest()){
+    e.preventDefault();
+    nameElement.parentElement.classList.add('not-valid');
+    nameElement.parentElement.classList.remove('valid');
+    nameElement.lastElementChild.style.display = 'none';
+    } else {
+        nameElement.parentElement.classList.add('valid');
+        nameElement.parentElement.classList.remove('not-valid');
+        nameElement.lastElementChild.style.display = 'block';
+    };
 
 //email validation
-
-let emailResult;
-
-function emailTest(){
+    function emailTest(){
     let emailInput = email.value;
     emailResult = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailInput);
     return emailResult;
-};
+    };
 
-// activities 
-let activitiesResult;
-
-function activitiesTest(){
+    if (!emailTest()){
+     e.preventDefault();
+     email.parentElement.classList.add('not-valid');
+     email.parentElement.classList.remove('valid');
+     email.lastElementChild.style.display = 'none';
+      } else {
+         email.parentElement.classList.add('valid');
+         email.parentElement.classList.remove('not-valid');
+         email.lastElementChild.style.display = 'block';
+        };
+    
+// activities validation
+    function activitiesTest() {
     let activitiesInput = totalCost > 0;
     return activitiesInput;
-};
+    }; 
 
+    if (!activitiesTest()){
+        e.preventDefault();
+        activities.parentElement.classList.add('not-valid')
+        activities.parentElement.classList.remove('valid');
+        activities.lastElementChild.style.display = 'none';
+         } else {
+            activities.parentElement.classList.add('valid');
+            activities.parentElement.classList.remove('not-valid');
+            activities.lastElementChild.style.display = 'block';
+           };  
 //card validation
-let cardResult;
-
-function cardTest(card){
+    function cardTest () {
     let cardInput = card.value;
     cardResult = /^[0-9]{13,16}$/.test(cardInput);
     return cardResult;
-};
+    };
 
-
+    if (!cardTest()){
+        e.preventDefault();
+        card.parentElement.classList.add('not-valid')
+        card.parentElement.classList.remove('valid');
+        card.lastElementChild.style.display = 'none';
+         } else {
+            card.parentElement.classList.add('valid');
+            card.parentElement.classList.remove('not-valid');
+            card.lastElementChild.style.display = 'block';
+           }; 
 //zipcode validation
-let zipcodeResult;
-
-function zipcodeTest(zipcode){
+    function zipTest() {
     let zipcodeInput = zipcode.value;
     zipcodeResult = /^\d{5}$/.test(zipcodeInput);
     return zipcodeResult;
-};
+    };
 
-
+    if (!zipTest()){
+        e.preventDefault();
+        zipcode.parentElement.classList.add('not-valid')
+        zipcode.parentElement.classList.remove('valid');
+        zipcode.lastElementChild.style.display = 'none';
+         } else {
+            zipcode.parentElement.classList.add('valid');
+            zipcode.parentElement.classList.remove('not-valid');
+            zipcode.lastElementChild.style.display = 'block';
+           };  
 //cvv validation
-
-let cvvResult;
-
-function cvvTest(cvv){
+    function cvvTest() {
     let cvvInput = cvv.value;
     cvvResult = /^\d{3}$/.test(cvvInput);
     return cvvResult;
-};
+    };
+
+    if (!cvvTest()){
+        e.preventDefault();
+        cvv.parentElement.classList.add('not-valid')
+        cvv.parentElement.classList.remove('valid');
+        cvv.lastElementChild.style.display = 'none';
+         } else {
+            cvv.parentElement.classList.add('valid');
+            cvv.parentElement.classList.remove('not-valid');
+            cvv.lastElementChild.style.display = 'block';
+           };    
+});
 
 
 
-//accessibility
+//accessibility - making focus states more obvious to users
 const activitiesCheckbox =  document.querySelectorAll('[type="checkbox"]');
 
 for (let i = 0; i < activitiesCheckbox.length; i++) {
-activitiesCheckbox[1].addEventListener("focus", e => {
+activitiesCheckbox[i].addEventListener("focus", e => {
+let checkboxParent = e.target.parentElement;
+checkboxParent.classList.add("focus");
 
 });
-activitiesCheckbox[1].addEventListener("blur", e => {
-
+activitiesCheckbox[i].addEventListener("blur", e => {
+    checkboxParent = e.target.parentElement;
+    checkboxParent.classList.remove("focus");
 });
-
 }
+
+
+ 
