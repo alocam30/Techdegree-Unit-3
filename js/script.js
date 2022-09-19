@@ -21,31 +21,23 @@ jobRole.addEventListener("change", e => {
 //tshirt info section 
 
 const shirtDesign = document.getElementById('design');
-const shirtColor = document.getElementById('color');
-shirtColor.disabled = true;
-
+const colorOptions = document.querySelectorAll('[data-theme]');
+colorOptions.disabled = true;
 
 shirtDesign.addEventListener("change", e => {
-    shirtColor.disabled = false;
+    colorOptions.disabled = false;
+    let eventValue = e.target.value;
     
-    for (let i = 0; i < shirtColor.length; i++ ) {
-        let eventValue = e.target.value;
+    colorOptions.forEach (option => {
 
-        let jsPuns = document.querySelectorAll('[data-theme="js puns"]');
-    
-        let  heartJS = document.querySelectorAll('[data-theme="heart js"]');
-
-         if (eventValue === jsPuns) {
+        if (option.dataset.theme === eventValue) {
             
-            jsPuns[i].hidden = false;
-            heartJS[i].hidden = true;
+            option.hidden = false;
          }  else {
-            jsPuns[i].hidden = true;
-            heartJS[i].hidden = false;
+            option.hidden = true;
          }
-
-     }
-    });
+    })      
+});
 
 //register for activities section
 
@@ -92,8 +84,7 @@ payment.addEventListener("change", e => {
         paypal.hidden = false;
         creditCard.hidden = true;
         bitcoin.hidden = true;
-    } else (paymentClicked === bitcoin.id)
-    {
+    } else {
         bitcoin.hidden = false;
         paypal.hidden = true;
         creditCard.hidden = true;
@@ -128,11 +119,11 @@ form.addEventListener("submit", e => {
     e.preventDefault();
     nameElement.parentElement.classList.add('not-valid');
     nameElement.parentElement.classList.remove('valid');
-    nameElement.lastElementChild.style.display = 'none';
+    nameElement.nextElementSibling.style.display = 'none';
     } else {
         nameElement.parentElement.classList.add('valid');
         nameElement.parentElement.classList.remove('not-valid');
-        nameElement.lastElementChild.style.display = 'block';
+        nameElement.nextElementSibling.style.display = 'block';
     };
 
 //email validation
@@ -146,11 +137,11 @@ form.addEventListener("submit", e => {
      e.preventDefault();
      email.parentElement.classList.add('not-valid');
      email.parentElement.classList.remove('valid');
-     email.lastElementChild.style.display = 'none';
+     email.nextElementSibling.style.display = 'none';
       } else {
          email.parentElement.classList.add('valid');
          email.parentElement.classList.remove('not-valid');
-         email.lastElementChild.style.display = 'block';
+         email.nextElementSibling.style.display = 'block';
         };
     
 // activities validation
@@ -163,11 +154,11 @@ form.addEventListener("submit", e => {
         e.preventDefault();
         activities.parentElement.classList.add('not-valid')
         activities.parentElement.classList.remove('valid');
-        activities.lastElementChild.style.display = 'none';
+        activities.nextElementSibling.style.display = 'none';
          } else {
             activities.parentElement.classList.add('valid');
             activities.parentElement.classList.remove('not-valid');
-            activities.lastElementChild.style.display = 'block';
+            activities.nextElementSibling.style.display = 'block';
            };  
 //card validation
     function cardTest () {
@@ -180,11 +171,11 @@ form.addEventListener("submit", e => {
         e.preventDefault();
         card.parentElement.classList.add('not-valid')
         card.parentElement.classList.remove('valid');
-        card.lastElementChild.style.display = 'none';
+        card.nextElementSibling.style.display = 'none';
          } else {
             card.parentElement.classList.add('valid');
             card.parentElement.classList.remove('not-valid');
-            card.lastElementChild.style.display = 'block';
+            card.nextElementSibling.style.display = 'block';
            }; 
 //zipcode validation
     function zipTest() {
@@ -197,11 +188,11 @@ form.addEventListener("submit", e => {
         e.preventDefault();
         zipcode.parentElement.classList.add('not-valid')
         zipcode.parentElement.classList.remove('valid');
-        zipcode.lastElementChild.style.display = 'none';
+        zipcode.nextElementSibling.style.display = 'none';
          } else {
             zipcode.parentElement.classList.add('valid');
             zipcode.parentElement.classList.remove('not-valid');
-            zipcode.lastElementChild.style.display = 'block';
+            zipcode.nextElementSibling.style.display = 'block';
            };  
 //cvv validation
     function cvvTest() {
@@ -214,11 +205,11 @@ form.addEventListener("submit", e => {
         e.preventDefault();
         cvv.parentElement.classList.add('not-valid')
         cvv.parentElement.classList.remove('valid');
-        cvv.lastElementChild.style.display = 'none';
+        cvv.nextElementSibling.style.display = 'none';
          } else {
             cvv.parentElement.classList.add('valid');
             cvv.parentElement.classList.remove('not-valid');
-            cvv.lastElementChild.style.display = 'block';
+            cvv.nextElementSibling.style.display = 'block';
            };    
 });
 
