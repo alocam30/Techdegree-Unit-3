@@ -1,4 +1,4 @@
-//this variable creates a flashing cursor in the Name input field
+//This variable creates a flashing cursor in the Name input field when the page first loads
 const nameElement = document.getElementById('name');
 nameElement.focus();
 
@@ -18,14 +18,15 @@ jobRole.addEventListener("change", e => {
      }
     });
 
-//Selecting a speciic design allows the user only to chose from the corresponding options in the Color field
+//Selecting a speciic design allows the user only to chose from the 3 corresponding color options
 
 const shirtDesign = document.getElementById('design');
 const colorOptions = document.querySelectorAll('[data-theme]');
-colorOptions.disabled = true;
+const colorSelect = document.getElementById('color');
+colorSelect.disabled = true;
 
 shirtDesign.addEventListener("change", e => {
-    colorOptions.disabled = false;
+    colorSelect.disabled = false;
     let eventValue = e.target.value;
     
     colorOptions.forEach (option => {
@@ -40,7 +41,7 @@ shirtDesign.addEventListener("change", e => {
 });
 
 //Created two variables that select an activity and associated cost
-//When a user selects an activity, the Total Cost is updated with the cost 
+//When a user selects an activity, the Total Cost is updated
 
 const activities = document.getElementById('activities');
 const total = document.getElementById('activities-cost');
@@ -92,7 +93,8 @@ payment.addEventListener("change", e => {
     }
 });
 
-//Notifies the user whethe
+//Makes it obvious to the user whether input form is valid or invalid.
+//Displays a green checkmark if value meets the criteria, and displays a red triangle if it does not.
 
 nameElement;
 const email = document.getElementById('email');
@@ -109,7 +111,7 @@ let zipcodeResult;
 let cvvResult;
 
 form.addEventListener("submit", e => {
-//name validation
+//name validation form
     function nameTest(){
     let nameInput = nameElement.value;
     let nameResult = /^[a-zA-z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameInput);
@@ -127,7 +129,7 @@ form.addEventListener("submit", e => {
         nameElement.nextElementSibling.style.display = 'none';;
     };
 
-//email validation
+//email validation form
 function emailTest(){
     let emailInput = email.value;
     emailResult = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailInput);
@@ -145,7 +147,7 @@ function emailTest(){
          email.nextElementSibling.style.display = 'none';
         };
     
-// activities validation
+// activities validation form
     function activitiesTest() {
     let activitiesInput = totalCost > 0;
     return activitiesInput;
@@ -155,13 +157,13 @@ function emailTest(){
         e.preventDefault();
         activities.parentElement.classList.add('not-valid')
         activities.parentElement.classList.remove('valid');
-        activities.nextElementSibling.style.display = 'block';
+        activities.lastElementChild.style.display = 'block';
          } else {
             activities.parentElement.classList.add('valid');
             activities.parentElement.classList.remove('not-valid');
-            activities.nextElementSibling.style.display = 'none';
+            activities.lastElementChild.style.display = 'none';
            };  
-//card validation
+//credit card validation form
     function cardTest () {
     let cardInput = card.value;
     cardResult = /^[0-9]{13,16}$/.test(cardInput);
@@ -172,13 +174,13 @@ function emailTest(){
         e.preventDefault();
         card.parentElement.classList.add('not-valid')
         card.parentElement.classList.remove('valid');
-        card.nextElementSibling.style.display = 'block';
+        card.lastElementChild.style.display = 'block';
          } else {
             card.parentElement.classList.add('valid');
             card.parentElement.classList.remove('not-valid');
-            card.nextElementSibling.style.display = 'none';
+            card.lastElementChild.style.display = 'none';
            }; 
-//zipcode validation
+//zipcode validation form
     function zipTest() {
     let zipcodeInput = zipcode.value;
     zipcodeResult = /^\d{5}$/.test(zipcodeInput);
@@ -189,13 +191,13 @@ function emailTest(){
         e.preventDefault();
         zipcode.parentElement.classList.add('not-valid')
         zipcode.parentElement.classList.remove('valid');
-        zipcode.nextElementSibling.style.display = 'block';
+        zipcode.lastElementChild.style.display = 'block';
          } else {
             zipcode.parentElement.classList.add('valid');
             zipcode.parentElement.classList.remove('not-valid');
-            zipcode.nextElementSibling.style.display = 'none';
+            zipcode.lastElementChild.style.display = 'none';
            };  
-//cvv validation
+//cvv validation form
     function cvvTest() {
     let cvvInput = cvv.value;
     cvvResult = /^\d{3}$/.test(cvvInput);
@@ -206,17 +208,16 @@ function emailTest(){
         e.preventDefault();
         cvv.parentElement.classList.add('not-valid')
         cvv.parentElement.classList.remove('valid');
-        cvv.nextElementSibling.style.display = 'block';
+        cvv.lastElementChild.style.display = 'block';
          } else {
             cvv.parentElement.classList.add('valid');
             cvv.parentElement.classList.remove('not-valid');
-            cvv.nextElementSibling.style.display = 'none';
+            cvv.lastElementChild.style.display = 'none';
            };    
 });
 
 
-
-//accessibility - making focus states more obvious to users
+//This section makes focus states more obvious to users, which makes it more accessible
 const activitiesCheckbox =  document.querySelectorAll('[type="checkbox"]');
 
 for (let i = 0; i < activitiesCheckbox.length; i++) {
