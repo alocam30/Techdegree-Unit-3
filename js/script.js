@@ -116,64 +116,28 @@ let cvvResult;
 
 form.addEventListener("submit", e => {
 //name validation form
-    function nameTest(){
+    function nameTest(nameElement){
     let nameInput = nameElement.value;
     let nameResult = /^[a-zA-z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameInput);
     return nameResult;
     };
 
-    
+    if (!nameTest()){
+        e.preventDefault();
+        nameElement.parentElement.classList.add('not-valid');
+        nameElement.parentElement.classList.remove('valid');
+        nameElement.nextElementSibling.style.display = 'block';
+        } else {
+            nameElement.parentElement.classList.add('valid');
+            nameElement.parentElement.classList.remove('not-valid');
+            nameElement.nextElementSibling.style.display = 'none';;
+        };
 
 //email validation form
-function emailTest(){
+function emailTest(email){
     let emailInput = email.value;
     emailResult = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailInput);
     return emailResult;
-    };
-
-    
-// activities validation form
-    function activitiesTest() {
-    let activitiesInput = totalCost > 0;
-    return activitiesInput;
-    }; 
-
-   
-//credit card validation form
-    function cardTest () {
-    let cardInput = card.value;
-    cardResult = /^[0-9]{13,16}$/.test(cardInput);
-    return cardResult;
-    };
-
-
-//zipcode validation form
-    function zipTest() {
-    let zipcodeInput = zipcode.value;
-    zipcodeResult = /^\d{5}$/.test(zipcodeInput);
-    return zipcodeResult;
-    };
-
-    
-//cvv validation form
-    function cvvTest() {
-    let cvvInput = cvv.value;
-    cvvResult = /^\d{3}$/.test(cvvInput);
-    return cvvResult;
-    };
-
-});
-
-
-if (!nameTest()){
-    e.preventDefault();
-    nameElement.parentElement.classList.add('not-valid');
-    nameElement.parentElement.classList.remove('valid');
-    nameElement.nextElementSibling.style.display = 'block';
-    } else {
-        nameElement.parentElement.classList.add('valid');
-        nameElement.parentElement.classList.remove('not-valid');
-        nameElement.nextElementSibling.style.display = 'none';;
     };
 
 
@@ -188,28 +152,60 @@ if (!nameTest()){
             email.nextElementSibling.style.display = 'none';
            };
 
- if (!activitiesTest()){
-  e.preventDefault();
-  activities.parentElement.classList.add('not-valid')
-  activities.parentElement.classList.remove('valid');
-  activities.lastElementChild.style.display = 'block';
-     } else {
-     activities.parentElement.classList.add('valid');
-     activities.parentElement.classList.remove('not-valid');
-     activities.lastElementChild.style.display = 'none'; 
-     };      
 
-  if (!cardTest()){
-   e.preventDefault();
-   card.parentElement.classList.add('not-valid')
-   card.parentElement.classList.remove('valid');
-   card.lastElementChild.style.display = 'none';
-   } else {
-    card.parentElement.classList.add('valid');
-    card.parentElement.classList.remove('not-valid');
-    card.lastElementChild.style.display = 'none';
-           }; 
-                
+    
+// activities validation form
+    function activitiesTest() {
+    let activitiesInput = totalCost > 0;
+    return activitiesInput;
+    }; 
+
+    if (!activitiesTest()){
+        e.preventDefault();
+        activities.parentElement.classList.add('not-valid')
+        activities.parentElement.classList.remove('valid');
+        activities.lastElementChild.style.display = 'block';
+           } else {
+           activities.parentElement.classList.add('valid');
+           activities.parentElement.classList.remove('not-valid');
+           activities.lastElementChild.style.display = 'none'; 
+           };     
+   
+//credit card validation form
+    function cardTest () {
+    let cardInput = card.value;
+    cardResult = /^[0-9]{13,16}$/.test(cardInput);
+    return cardResult;
+    };
+    if (!cardTest()){
+        e.preventDefault();
+        card.parentElement.classList.add('not-valid')
+        card.parentElement.classList.remove('valid');
+        card.lastElementChild.style.display = 'none';
+        } else {
+         card.parentElement.classList.add('valid');
+         card.parentElement.classList.remove('not-valid');
+         card.lastElementChild.style.display = 'none';
+                }; 
+                     
+
+//zipcode validation form
+    function zipTest(zipcode) {
+    let zipcodeInput = zipcode.value;
+    zipcodeResult = /^\d{5}$/.test(zipcodeInput);
+    return zipcodeResult;
+    };
+
+    
+//cvv validation form
+    function cvvTest(cvv) {
+    let cvvInput = cvv.value;
+    cvvResult = /^\d{3}$/.test(cvvInput);
+    return cvvResult;
+    };
+
+});
+
 
 //This section makes focus states more obvious to users, which makes it more accessible
 const activitiesCheckbox =  document.querySelectorAll('[type="checkbox"]');
