@@ -21,24 +21,28 @@ jobRole.addEventListener("change", e => {
 //Selecting a speciic design allows the user only to chose from the 3 corresponding color options
 
 const shirtDesign = document.getElementById('design');
-const colorOptions = document.querySelectorAll('[data-theme]');
-const colorSelect = document.getElementById('color');
-colorSelect.disabled = true;
+let color = document.getElementById('color');
+color.disabled = true;
+
+let colorSelect = color.children;
+let eventValue;
+
 
 shirtDesign.addEventListener("change", e => {
-    colorSelect.disabled = false;
-    let eventValue = e.target.value;
+    color.disabled = false;
+     eventValue = e.target.value;
     
-    colorOptions.forEach (option => {
+    for (let i = 1; i < colorSelect.length; i++) {
 
-        if (option.dataset.theme === eventValue) {
-            
-            option.hidden = false;
-         }  else {
-            option.hidden = true;
-         }
-    })      
-});
+    if (eventValue === colorSelect[i].getAttribute('data-theme')) {
+        colorSelect[i].hidden = false;
+        colorSelect[i].selected = true;
+    } else {
+        colorSelect[i].hidden = true;
+        colorSelect[i].selected = false;
+    }
+}
+});;
 
 //Created two variables that select an activity and associated cost
 //When a user selects an activity, the Total Cost is updated
@@ -118,7 +122,50 @@ form.addEventListener("submit", e => {
     return nameResult;
     };
 
-    if (!nameTest()){
+    
+
+//email validation form
+function emailTest(){
+    let emailInput = email.value;
+    emailResult = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailInput);
+    return emailResult;
+    };
+
+    
+// activities validation form
+    function activitiesTest() {
+    let activitiesInput = totalCost > 0;
+    return activitiesInput;
+    }; 
+
+   
+//credit card validation form
+    function cardTest () {
+    let cardInput = card.value;
+    cardResult = /^[0-9]{13,16}$/.test(cardInput);
+    return cardResult;
+    };
+
+
+//zipcode validation form
+    function zipTest() {
+    let zipcodeInput = zipcode.value;
+    zipcodeResult = /^\d{5}$/.test(zipcodeInput);
+    return zipcodeResult;
+    };
+
+    
+//cvv validation form
+    function cvvTest() {
+    let cvvInput = cvv.value;
+    cvvResult = /^\d{3}$/.test(cvvInput);
+    return cvvResult;
+    };
+
+});
+
+
+if (!nameTest()){
     e.preventDefault();
     nameElement.parentElement.classList.add('not-valid');
     nameElement.parentElement.classList.remove('valid');
@@ -129,93 +176,40 @@ form.addEventListener("submit", e => {
         nameElement.nextElementSibling.style.display = 'none';;
     };
 
-//email validation form
-function emailTest(){
-    let emailInput = email.value;
-    emailResult = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailInput);
-    return emailResult;
-    };
 
     if (!emailTest()){
-     e.preventDefault();
-     email.parentElement.classList.add('not-valid');
-     email.parentElement.classList.remove('valid');
-     email.nextElementSibling.style.display = 'block';
-      } else {
-         email.parentElement.classList.add('valid');
-         email.parentElement.classList.remove('not-valid');
-         email.nextElementSibling.style.display = 'none';
-        };
-    
-// activities validation form
-    function activitiesTest() {
-    let activitiesInput = totalCost > 0;
-    return activitiesInput;
-    }; 
-
-    if (!activitiesTest()){
         e.preventDefault();
-        activities.parentElement.classList.add('not-valid')
-        activities.parentElement.classList.remove('valid');
-        activities.lastElementChild.style.display = 'block';
+        email.parentElement.classList.add('not-valid');
+        email.parentElement.classList.remove('valid');
+        email.nextElementSibling.style.display = 'block';
          } else {
-            activities.parentElement.classList.add('valid');
-            activities.parentElement.classList.remove('not-valid');
-            activities.lastElementChild.style.display = 'none';
-           };  
-//credit card validation form
-    function cardTest () {
-    let cardInput = card.value;
-    cardResult = /^[0-9]{13,16}$/.test(cardInput);
-    return cardResult;
-    };
+            email.parentElement.classList.add('valid');
+            email.parentElement.classList.remove('not-valid');
+            email.nextElementSibling.style.display = 'none';
+           };
 
-    if (!cardTest()){
-        e.preventDefault();
-        card.parentElement.classList.add('not-valid')
-        card.parentElement.classList.remove('valid');
-        card.lastElementChild.style.display = 'block';
-         } else {
-            card.parentElement.classList.add('valid');
-            card.parentElement.classList.remove('not-valid');
-            card.lastElementChild.style.display = 'none';
+ if (!activitiesTest()){
+  e.preventDefault();
+  activities.parentElement.classList.add('not-valid')
+  activities.parentElement.classList.remove('valid');
+  activities.lastElementChild.style.display = 'block';
+     } else {
+     activities.parentElement.classList.add('valid');
+     activities.parentElement.classList.remove('not-valid');
+     activities.lastElementChild.style.display = 'none'; 
+     };      
+
+  if (!cardTest()){
+   e.preventDefault();
+   card.parentElement.classList.add('not-valid')
+   card.parentElement.classList.remove('valid');
+   card.lastElementChild.style.display = 'none';
+   } else {
+    card.parentElement.classList.add('valid');
+    card.parentElement.classList.remove('not-valid');
+    card.lastElementChild.style.display = 'none';
            }; 
-//zipcode validation form
-    function zipTest() {
-    let zipcodeInput = zipcode.value;
-    zipcodeResult = /^\d{5}$/.test(zipcodeInput);
-    return zipcodeResult;
-    };
-
-    if (!zipTest()){
-        e.preventDefault();
-        zipcode.parentElement.classList.add('not-valid')
-        zipcode.parentElement.classList.remove('valid');
-        zipcode.lastElementChild.style.display = 'block';
-         } else {
-            zipcode.parentElement.classList.add('valid');
-            zipcode.parentElement.classList.remove('not-valid');
-            zipcode.lastElementChild.style.display = 'none';
-           };  
-//cvv validation form
-    function cvvTest() {
-    let cvvInput = cvv.value;
-    cvvResult = /^\d{3}$/.test(cvvInput);
-    return cvvResult;
-    };
-
-    if (!cvvTest()){
-        e.preventDefault();
-        cvv.parentElement.classList.add('not-valid')
-        cvv.parentElement.classList.remove('valid');
-        cvv.lastElementChild.style.display = 'block';
-         } else {
-            cvv.parentElement.classList.add('valid');
-            cvv.parentElement.classList.remove('not-valid');
-            cvv.lastElementChild.style.display = 'none';
-           };    
-});
-
+                
 
 //This section makes focus states more obvious to users, which makes it more accessible
 const activitiesCheckbox =  document.querySelectorAll('[type="checkbox"]');
