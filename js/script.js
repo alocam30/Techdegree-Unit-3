@@ -47,7 +47,7 @@ shirtDesign.addEventListener("change", e => {
 //Created two variables that select an activity and associated cost
 //When a user selects an activity, the Total Cost is updated
 
-const activities = document.getElementById('activities');
+let activities = document.getElementById('activities');
 const total = document.getElementById('activities-cost');
 let totalCost = 0;
 
@@ -100,19 +100,12 @@ payment.addEventListener("change", e => {
 //Makes it obvious to the user whether input form is valid or invalid.
 //Displays a green checkmark if value meets the criteria, and displays a red triangle if it does not.
 
-nameElement;
 const email = document.getElementById('email');
-activities;
 const card = document.getElementById('cc-num');
 const zipcode = document.getElementById('zip');
 const cvv = document.getElementById('cvv');
 const form = document.querySelector('form');
 
-let emailResult;
-let activitiesResult;
-let cardResult;
-let zipcodeResult;
-let cvvResult;
 
 form.addEventListener("submit", e => {
 //name validation form
@@ -125,21 +118,21 @@ form.addEventListener("submit", e => {
 //email validation form
 function emailTest(email){
     let emailInput = email.value;
-    emailResult = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailInput);
+    let emailResult = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailInput);
     return emailResult;
     };
 
     
 // activities validation form
-    function activitiesTest() {
+    function activitiesTest(activities) {
     let activitiesInput = totalCost > 0;
     return activitiesInput;
     }; 
 
 //credit card validation form
-    function cardTest () {
+    function cardTest (card) {
     let cardInput = card.value;
-    cardResult = /^[0-9]{13,16}$/.test(cardInput);
+    let cardResult = /^[0-9]{13,16}$/.test(cardInput);
     return cardResult;
     };   
 
@@ -159,12 +152,12 @@ function emailTest(email){
     };
 
 
-    
-    if (!nameTest()){
+
+    if (!nameTest(nameElement)){
         e.preventDefault();
         nameElement.parentElement.classList.add('not-valid');
         nameElement.parentElement.classList.remove('valid');
-        nameElement.nextElementSibling.style.display = '';
+        nameElement.nextElementSibling.style.display = 'block';
         } else {
             nameElement.parentElement.classList.add('valid');
             nameElement.parentElement.classList.remove('not-valid');
@@ -172,11 +165,11 @@ function emailTest(email){
         };   
 
 
-    if (!emailTest()){
+    if (!emailTest(email)){
         e.preventDefault();
         email.parentElement.classList.add('not-valid');
         email.parentElement.classList.remove('valid');
-        email.nextElementSibling.style.display = '';
+        email.nextElementSibling.style.display = 'block';
          } else {
             email.parentElement.classList.add('valid');
             email.parentElement.classList.remove('not-valid');
@@ -185,22 +178,22 @@ function emailTest(email){
 
 
 
-    if (!activitiesTest()){
+    if (!activitiesTest(activities)){
         e.preventDefault();
         activities.parentElement.classList.add('not-valid')
         activities.parentElement.classList.remove('valid');
-        activities.lastElementChild.style.display = '';
+        activities.lastElementChild.style.display = 'block';
            } else {
            activities.parentElement.classList.add('valid');
            activities.parentElement.classList.remove('not-valid');
            activities.lastElementChild.style.display = 'none'; 
            };  
 
-    if (!cardTest) {
+    if (!cardTest(card)) {
         e.preventDefault();
         card.parentElement.classList.add('not-valid')
         card.parentElement.classList.remove('valid');
-        card.lastElementChild.style.display = '';
+        card.lastElementChild.style.display = 'block';
         } else {
          card.parentElement.classList.add('valid');
          card.parentElement.classList.remove('not-valid');
@@ -208,22 +201,22 @@ function emailTest(email){
         }; 
 
 
-    if (!zipTest) {
+    if (!zipTest(zipcode)) {
         e.preventDefault();
         zipcode.parentElement.classList.add('not-valid')
         zipcode.parentElement.classList.remove('valid');
-        zipcode.lastElementChild.style.display = '';
+        zipcode.lastElementChild.style.display = 'block';
         } else {
          card.parentElement.classList.add('valid');
          card.parentElement.classList.remove('not-valid');
          card.lastElementChild.style.display = 'none';
         };     
 
-    if (!cvvTest) {
+    if (!cvvTest(cvv)) {
         e.preventDefault();
         cvv.parentElement.classList.add('not-valid')
        cvv.parentElement.classList.remove('valid');
-        cvv.lastElementChild.style.display = '';
+        cvv.lastElementChild.style.display = 'block';
         } else {
          cvv.parentElement.classList.add('valid');
          cvv.parentElement.classList.remove('not-valid');
