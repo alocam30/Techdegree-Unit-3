@@ -107,16 +107,15 @@ const cvv = document.getElementById('cvv');
 const form = document.querySelector('form');
 
 
-form.addEventListener("submit", e => {
 //name validation form
-    function nameTest(nameElement){
+    function nameTest(){
     let nameInput = nameElement.value;
     let nameResult = /^[a-zA-z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameInput); //returns T/F
     return nameResult;
     };
 
 //email validation form
-function emailTest(email){
+function emailTest(){
     let emailInput = email.value;
     let emailResult = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailInput);
     return emailResult;
@@ -124,20 +123,20 @@ function emailTest(email){
 
     
 // activities validation form
-    function activitiesTest(activities) {
+    function activitiesTest() {
     let activitiesInput = totalCost > 0;
     return activitiesInput;
     }; 
 
 //credit card validation form
-    function cardTest (card) {
+    function cardTest () {
     let cardInput = card.value;
     let cardResult = /^[0-9]{13,16}$/.test(cardInput);
     return cardResult;
     };   
 
 //zipcode validation form
-    function zipTest(zipcode) {
+    function zipTest() {
     let zipcodeInput = zipcode.value;
     zipcodeResult = /^\d{5}$/.test(zipcodeInput);
     return zipcodeResult;
@@ -145,92 +144,91 @@ function emailTest(email){
 
     
 //cvv validation form
-    function cvvTest(cvv) {
+    function cvvTest() {
     let cvvInput = cvv.value;
     cvvResult = /^\d{3}$/.test(cvvInput);
     return cvvResult;
     };
 
+    form.addEventListener("submit", (e) => {
 
+        if (!nameTest(nameElement)){
+            nameElement.parentElement.classList.add('not-valid');
+            nameElement.parentElement.classList.remove('valid');
+            nameElement.nextElementSibling.style.display = 'block';
+            e.preventDefault();
+            } else {
+                nameElement.parentElement.classList.add('valid');
+                nameElement.parentElement.classList.remove('not-valid');
+                nameElement.nextElementSibling.style.display = 'none';
+                nameElement.classList.remove('error-border');
+            };
+    
+        if (!emailTest(email)){
+            email.parentElement.classList.add('not-valid');
+            email.parentElement.classList.remove('valid');
+            email.nextElementSibling.style.display = 'block';
+            e.preventDefault();
+             } else {
+                email.parentElement.classList.add('valid');
+                email.parentElement.classList.remove('not-valid');
+                email.nextElementSibling.style.display = 'none';
+                email.classList.remove('error-border');
+               };
+    
+        if (!activitiesTest(activities)){
+            activities.parentElement.classList.add('not-valid');
+            activities.parentElement.classList.remove('valid');
+            activities.lastElementChild.style.display = 'block';
+            e.preventDefault();
+               } else {
+               activities.parentElement.classList.add('valid');
+               activities.parentElement.classList.remove('not-valid');
+               activities.lastElementChild.style.display = 'none'; 
+               activities.classList.remove('activities-box', 'error-border');
+               };  
+    
+        if (!cardTest(card)) {
+            card.parentElement.classList.add('not-valid');
+            card.parentElement.classList.remove('valid');
+            card.nextElementSibling.style.display = 'block';
+            e.preventDefault();
+            } else {
+             card.parentElement.classList.add('valid');
+             card.parentElement.classList.remove('not-valid');
+             card.nextElementSibling.style.display = 'none';
+             card.classList.remove('error-border');
+            }; 
+    
+    
+        if (!zipTest(zipcode)) {
+            zipcode.parentElement.classList.add('not-valid');
+            zipcode.parentElement.classList.remove('valid');
+            zipcode.nextElementSibling.style.display = 'block';
+            e.preventDefault();
+            } else {
+             zipcode.parentElement.classList.add('valid');
+             zipcode.parentElement.classList.remove('not-valid');
+             zipcode.nextElementSibling.style.display = 'none';
+             zipcode.classList.remove('error-border');
+            };     
+    
+           
+    
+        if (!cvvTest(cvv)) {
+            cvv.parentElement.classList.add('not-valid');
+            cvv.parentElement.classList.remove('valid');
+            cvv.nextElementSibling.style.display = 'block';
+            e.preventDefault();
+            } else {
+             cvv.parentElement.classList.add('valid');
+             cvv.parentElement.classList.remove('not-valid');
+             cvv.nextElementSibling.style.display = 'none';
+             cvv.classList.remove('error-border');
+            };  
+    
+    });
 
-    if (!nameTest(nameElement)){
-        e.preventDefault();
-        nameElement.parentElement.classList.add('not-valid');
-        nameElement.parentElement.classList.remove('valid');
-        nameElement.nextElementSibling.style.display = 'block';
-        } else {
-            nameElement.parentElement.classList.add('valid');
-            nameElement.parentElement.classList.remove('not-valid');
-            nameElement.nextElementSibling.style.display = 'none';
-            nameElement.classList.remove('error-border');
-        };
-
-    if (!emailTest(email)){
-        e.preventDefault();
-        email.parentElement.classList.add('not-valid');
-        email.parentElement.classList.remove('valid');
-        email.nextElementSibling.style.display = 'block';
-         } else {
-            email.parentElement.classList.add('valid');
-            email.parentElement.classList.remove('not-valid');
-            email.nextElementSibling.style.display = 'none';
-            email.classList.remove('error-border');
-           };
-
-
-
-    if (!activitiesTest(activities)){
-        e.preventDefault();
-        activities.parentElement.classList.add('not-valid')
-        activities.parentElement.classList.remove('valid');
-        activities.lastElementChild.style.display = 'block';
-           } else {
-           activities.parentElement.classList.add('valid');
-           activities.parentElement.classList.remove('not-valid');
-           activities.lastElementChild.style.display = 'none'; 
-           activities.classList.remove('activities-box error-border');
-           };  
-
-    if (!cardTest(card)) {
-        e.preventDefault();
-        card.parentElement.classList.add('not-valid')
-        card.parentElement.classList.remove('valid');
-        card.nextElementSibling.style.display = 'block';
-        } else {
-         card.parentElement.classList.add('valid');
-         card.parentElement.classList.remove('not-valid');
-         card.nextElementSibling.style.display = 'none';
-         card.classList.remove('error-border');
-        }; 
-
-
-    if (!zipTest(zipcode)) {
-        e.preventDefault();
-        zipcode.parentElement.classList.add('not-valid')
-        zipcode.parentElement.classList.remove('valid');
-        zipcode.nextElementSibling.style.display = 'block';
-        } else {
-         zipcode.parentElement.classList.add('valid');
-         zipcode.parentElement.classList.remove('not-valid');
-         zipcode.nextElementSibling.style.display = 'none';
-         zipcode.classList.remove('error-border');
-
-         
-        };     
-
-    if (!cvvTest(cvv)) {
-        e.preventDefault();
-        cvv.parentElement.classList.add('not-valid')
-       cvv.parentElement.classList.remove('valid');
-        cvv.nextElementSibling.style.display = 'block';
-        } else {
-         cvv.parentElement.classList.add('valid');
-         cvv.parentElement.classList.remove('not-valid');
-         cvv.nextElementSibling.style.display = 'none';
-         cvv.classList.remove('error-border');
-        };  
-
-});
 
 
 //This section makes focus states more obvious to users, which makes it more accessible
