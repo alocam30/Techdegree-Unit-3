@@ -186,7 +186,9 @@ function emailTest(){
                activities.parentElement.classList.remove('not-valid');
                activities.lastElementChild.style.display = 'none'; 
                activities.classList.remove('activities-box', 'error-border');
-               };  
+            };  
+    
+        if (payment.value !== 'paypal' && payment.value !== 'bitcoin') {         
     
         if (!cardTest(card)) {
             card.parentElement.classList.add('not-valid');
@@ -227,7 +229,8 @@ function emailTest(){
              cvv.classList.remove('error-border');
             };  
     
-    });
+    }
+});
 
 
 
